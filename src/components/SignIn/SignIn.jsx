@@ -33,7 +33,7 @@ function SignIn() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8081/api/v1/auth/login', formData);
+            const response = await axios.post(process.env.API_BASE_URL+'/auth/login', formData);
             console.log('Response', response.data);
             sessionStorage.setItem('ac:t', response.data.accessToken);
             localStorage.setItem('rf:t', response.data.refreshToken)
@@ -81,7 +81,7 @@ function SignIn() {
                 <hr className="auth-section-breaker" />
                 <div className="auth-core-footer">
                     <div className="auth-field">
-                        <button className='auth-with-btn google-sign-btn' type="button" onClick={()=>{window.location.href ="http://localhost:8081/oauth2/authorization/google"}}>Sign In with Google <i class='bx bxl-google'></i></button>
+                        <button className='auth-with-btn google-sign-btn' type="button" onClick={()=>{window.location.href = process.env.REACT_APP_API_DOMAIN+"/oauth2/authorization/google"}}>Sign In with Google <i class='bx bxl-google'></i></button>
                     </div>
                     <div className="auth-field">
                         <button className='auth-with-btn microsoft-sign-btn' type="button">Sign In with Microsoft <i class='bx bxl-microsoft'></i>

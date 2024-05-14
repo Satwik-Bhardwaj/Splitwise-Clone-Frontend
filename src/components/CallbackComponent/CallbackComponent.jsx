@@ -14,9 +14,11 @@ function CallbackComponent({children}) {
     console.log(code);
 
     useEffect(() => {
+        console.log('called');
+
         const fetchCallbackData = async () => {
             try {
-                const response = await axios.get('http://localhost:8081/api/v1/oauth2/callback', {
+                const response = await axios.get(process.env.API_BASE_URL+'/oauth2/callback', {
                     params: {
                         state : state,
                         code : code
@@ -28,7 +30,7 @@ function CallbackComponent({children}) {
             }
         }
         fetchCallbackData();
-    }, []);
+    }, [state, code]);
 
     return (
         <div className='callback-container'>
